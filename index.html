@@ -1,11 +1,88 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
-  <title>csavesz site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="img/favicon.png" type="image/png" />
+  <title>csavesz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      background: #0d0d0d;
+      color: white;
+      font-family: 'Space Grotesk', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .heart-container {
+      position: relative;
+      width: 300px;
+      height: 270px;
+      clip-path: url(#heartClip);
+      -webkit-clip-path: url(#heartClip);
+    }
+
+    .heart-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .heart-container:hover img {
+      transform: scale(1.05);
+    }
+
+    .overlay-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 1.5rem;
+      pointer-events: none;
+    }
+
+    svg {
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+  </style>
 </head>
 <body>
-  <p>Szia! én vagyok</p>
-  <h1>Csavesz</h1>
+  <svg>
+    <defs>
+      <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.9
+                 C0.1,0.6,0,0.35,0.25,0.2
+                 C0.4,0.1,0.5,0.2,0.5,0.3
+                 C0.5,0.2,0.6,0.1,0.75,0.2
+                 C1,0.35,0.9,0.6,0.5,0.9Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="heart-container">
+    <img src="img/shippo.JPEG" alt="Shippo" />
+    <div class="overlay-text">csavesz.hu</div>
+  </div>
+
+  <script>
+    // parallax effektus
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      document.querySelector('.heart-container img').style.transform =
+        `scale(1.05) translate(${x * 20}px, ${y * 20}px)`;
+    });
+  </script>
 </body>
 </html>
